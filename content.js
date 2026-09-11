@@ -1,6 +1,6 @@
 window.TCB_CONTENT = {
   hero: {
-    title: "Cars.\nCulture.\nStories.",
-    description: "A premium automotive community built around real cars, real people and the stories behind them."
+    title: "Cars.\nModifications.\nStories.",
+    description: "Real cars. Real builds. Real stories — from an automotive creator building something bigger than a social feed."
   }
 };

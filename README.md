@@ -1,37 +1,20 @@
-# TCB Auto — The Car Bro
+# Asif King Ahmed / TCB Auto — Website V2
 
-A premium, responsive TCB Auto / The Car Bro website starter.
+Premium personal-brand automotive website designed for Instagram bio traffic.
 
-## Stack
-- Static HTML/CSS/JS frontend
-- Optional Supabase Auth + Postgres for the admin CMS
-- Designed for free static hosting such as Vercel
+## Identity
+- Primary identity: Asif King Ahmed
+- Instagram: @asif_king_ahmed
+- YouTube: https://www.youtube.com/@asifkingahmed
+- Email: asifahmedmedia@gmail.com
+- TCB Auto / The Car Bro is positioned as the future platform.
 
-## Brand direction
-- TCB Auto / The Car Bro
-- Black / graphite / red
-- Premium, minimal automotive editorial style
-- Personal-brand connection: "By Asif King Ahmed"
+## Deployment
+Push to the existing GitHub repository connected to Vercel. Vercel will automatically create a new production deployment.
 
-## Pages / sections
-- Home
-- About
-- Cars / Verified Used Cars (Coming Soon)
-- Gallery
-- TCB Stories / Community (Coming Soon)
-- Sell / Buy / Exchange (Coming Soon)
-- Articles / Updates (Coming Soon)
-- Contact & Collaborations
+## Branding
+- Header/fav icon: TCB Auto logo
+- Main hero disc: supplied Asif King Ahmed AK logo
+- Palette: black, graphite, white, red, subtle gold
 
-## Important
-The included site works immediately as a polished static website using the content in `content.js`.
-
-For a real private admin login and editable CMS:
-1. Create a free Supabase project.
-2. Create an Auth user for yourself.
-3. Run `supabase-schema.sql` in the Supabase SQL editor.
-4. Copy your Supabase URL and anon key into `config.js`.
-5. Change the admin UUID in `supabase-schema.sql` before running it, or insert the admin ID into the `admin_users` table.
-6. Deploy this folder to Vercel.
-
-Do NOT put a Supabase service-role key in the frontend. Only use the public anon key.
+Never commit a Supabase secret/service-role key.
