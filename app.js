@@ -1,61 +1,48 @@
-const cfg = window.TCB_CONFIG || {};
-let supabaseClient = null;
-if (cfg.SUPABASE_URL && cfg.SUPABASE_ANON_KEY && window.supabase) {
-  supabaseClient = window.supabase.createClient(cfg.SUPABASE_URL, cfg.SUPABASE_ANON_KEY);
-}
-const $ = (s) => document.querySelector(s);
-const content = window.TCB_CONTENT || {hero:{title:"Cars.\nModifications.\nStories.",description:"Real cars. Real builds. Real stories."}};
+const cfg=window.TCB_CONFIG||{};let supabaseClient=null;
+if(cfg.SUPABASE_URL&&cfg.SUPABASE_ANON_KEY&&window.supabase){supabaseClient=window.supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_ANON_KEY)}
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+let content=window.TCB_CONTENT||{}, currentAdmin=false;
 
-function renderHero(){
-  const title = (content.hero?.title || "").replace(/\n/g,"<br>");
-  $("#heroTitle") && ($("#heroTitle").innerHTML = title.replace("Modifications.","<span>Modifications.</span>"));
-  $("#heroDesc") && ($("#heroDesc").textContent = content.hero?.description || "");
-}
-async function loadRemoteContent(){
-  if(!supabaseClient) return;
-  const {data,error}=await supabaseClient.from("site_content").select("content_key,value");
-  if(error || !data) return;
-  const hero=data.find(x=>x.content_key==="hero");
-  if(hero?.value){content.hero={...content.hero,...hero.value};renderHero();}
-}
-function initMenu(){
-  $("#menuBtn")?.addEventListener("click",()=>{
-    const nav=$("#nav"); nav.style.display=nav.style.display==="flex"?"":"flex";
-  });
-  document.querySelectorAll("#nav a").forEach(a=>a.addEventListener("click",()=>{if(innerWidth<=900)$("#nav").style.display="";}));
-}
+function esc(v=""){return String(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]))}
+function renderHero(){const el=$("#heroDesc");if(el)el.textContent=content.hero?.description||"Real cars. Real builds. Real stories."}
+async function loadSiteContent(){if(!supabaseClient)return;const {data}=await supabaseClient.from("site_content").select("content_key,value");if(data){for(const row of data)content[row.content_key]=row.value;renderHero()}}
+function initMenu(){$("#menuBtn")?.addEventListener("click",()=>{$("#nav").classList.toggle("open");$("#menuBtn").setAttribute("aria-expanded",$("#nav").classList.contains("open"))});$$("nav a").forEach(a=>a.addEventListener("click",()=>$("#nav").classList.remove("open")))}
+function tabs(){$$(".tab").forEach(b=>b.onclick=()=>{$$(".tab").forEach(x=>x.classList.remove("active"));$$(".tab-panel").forEach(x=>x.classList.remove("active"));b.classList.add("active");$("#"+b.dataset.tab).classList.add("active")})}
+async function isAdmin(session){if(!session)return false;const {data}=await supabaseClient.from("admin_users").select("user_id").eq("user_id",session.user.id).maybeSingle();return !!data}
 async function initAdmin(){
-  const state=$("#adminState"),panel=$("#adminPanel");
-  if(!state||!panel)return;
-  if(!supabaseClient){state.innerHTML='<div class="admin-msg">Admin CMS connection is not available in this build.</div>';return;}
-  const {data:{session}}=await supabaseClient.auth.getSession(); showAdmin(session);
-  supabaseClient.auth.onAuthStateChange((_e,s)=>showAdmin(s));
-  function showAdmin(session){
-    if(!session){
-      state.innerHTML=`<form id="loginForm" class="admin-panel">
-        <label>Email<input id="loginEmail" type="email" required placeholder="Admin email"></label>
-        <label>Password<input id="loginPassword" type="password" required placeholder="Password"></label>
-        <button class="btn btn-primary" type="submit">Sign in</button>
-        <div id="loginMsg" class="admin-msg"></div>
-      </form>`;
-      panel.hidden=true;
-      $("#loginForm").addEventListener("submit",async e=>{
-        e.preventDefault(); const msg=$("#loginMsg"); msg.textContent="Signing in…";
-        const {error}=await supabaseClient.auth.signInWithPassword({email:$("#loginEmail").value,password:$("#loginPassword").value});
-        msg.textContent=error?error.message:"Signed in.";
-      });
-    }else{
-      state.innerHTML=`<div class="admin-msg">Signed in as <b>${session.user.email}</b>.</div>`;
-      panel.hidden=false; $("#editHeroTitle").value=content.hero.title; $("#editHeroDesc").value=content.hero.description;
-      $("#logout").onclick=()=>supabaseClient.auth.signOut();
-      $("#saveHero").onclick=async()=>{
-        const value={title:$("#editHeroTitle").value,description:$("#editHeroDesc").value};
-        const {error}=await supabaseClient.from("site_content").upsert({content_key:"hero",value,updated_at:new Date().toISOString()},{onConflict:"content_key"});
-        const msg=document.createElement("div");msg.className="admin-msg";msg.textContent=error?error.message:"Saved.";
-        state.appendChild(msg);if(!error){content.hero=value;renderHero();}
-      };
-    }
-  }
+ const state=$("#adminState"),panel=$("#adminPanel");if(!state||!panel)return;
+ if(!supabaseClient){state.innerHTML='<div class="admin-msg admin-error">Supabase is not connected. Check config.js.</div>';return}
+ const {data:{session}}=await supabaseClient.auth.getSession(); await show(session);
+ supabaseClient.auth.onAuthStateChange((_e,s)=>setTimeout(()=>show(s),0));
+ async function show(session){
+   if(!(await isAdmin(session))){currentAdmin=false;panel.hidden=true;state.innerHTML=`<form id="loginForm" class="admin-panel" style="padding:20px"><label>Email<input id="loginEmail" type="email" required placeholder="Admin email"></label><label>Password<input id="loginPassword" type="password" required placeholder="Password"></label><button class="btn primary" type="submit">Sign in</button><div id="loginMsg"></div></form>`;$("#loginForm").onsubmit=async e=>{e.preventDefault();$("#loginMsg").className="admin-msg";$("#loginMsg").textContent="Signing in…";const {error}=await supabaseClient.auth.signInWithPassword({email:$("#loginEmail").value,password:$("#loginPassword").value});if(error)$("#loginMsg").textContent=error.message};return}
+   currentAdmin=true;state.innerHTML=`<div class="admin-msg">Signed in as <b>${esc(session.user.email)}</b>. You have administrator access.</div>`;panel.hidden=false;tabs();$("#logout").onclick=()=>supabaseClient.auth.signOut();$("#editHeroTitle").value=content.hero?.title||"Cars.\nModifications.\nStories.";$("#editHeroDesc").value=content.hero?.description||"";bindAdmin();
+   await refreshArticles();await refreshCars();await refreshGallery();
+ }
+ function bindAdmin(){
+   $("#saveHero").onclick=async()=>{await upsertContent("hero",{title:$("#editHeroTitle").value,description:$("#editHeroDesc").value})};
+   $("#newArticle").onclick=()=>openArticle();$("#cancelArticle").onclick=()=>$("#articleEditor").hidden=true;$("#saveArticle").onclick=saveArticle;
+   $("#newCar").onclick=()=>openCar();$("#cancelCar").onclick=()=>$("#carEditor").hidden=true;$("#saveCar").onclick=saveCar;
+   $("#newGallery").onclick=()=>openGallery();$("#cancelGallery").onclick=()=>$("#galleryEditor").hidden=true;$("#saveGallery").onclick=saveGallery;
+   $("#saveSettings").onclick=async()=>{await upsertContent("settings",{instagram:$("#setInstagram").value,youtube:$("#setYoutube").value,email:$("#setEmail").value})};
+ }
+ async function upsertContent(key,value){const {error}=await supabaseClient.from("site_content").upsert({content_key:key,value,updated_at:new Date().toISOString()},{onConflict:"content_key"});flash(error?error.message:"Saved successfully.",!!error);if(!error){content[key]=value;renderHero()}}
+ function flash(msg,error=false){let n=document.createElement("div");n.className="admin-msg"+(error?" admin-error":"");n.textContent=msg;state.appendChild(n);setTimeout(()=>n.remove(),3500)}
+ async function refreshArticles(){const {data}=await supabaseClient.from("articles").select("*").order("created_at",{ascending:false});$("#articleAdminList").innerHTML=(data||[]).map(a=>`<div class="admin-item"><div><b>${esc(a.title)}</b><span>${a.published?"Published":"Draft"}</span></div><div class="admin-item-actions"><button onclick='window.editArticle(${JSON.stringify(a)})'>Edit</button><button onclick='window.deleteArticle("${a.id}","articles")'>Delete</button></div></div>`).join("")||'<div class="admin-msg">No articles yet.</div>';renderArticles(data||[])}
+ function renderArticles(data){const pub=data.filter(x=>x.published);const grid=$("#articleGrid");if(!pub.length)return;grid.innerHTML=pub.slice(0,6).map((a,i)=>`<article class="article-card ${i===0?"featured-article":""}"><div class="article-art" style="${a.image_url?`background-image:linear-gradient(transparent 35%,rgba(0,0,0,.75)),url('${esc(a.image_url)}');background-size:cover;background-position:center`:''}"><span>ARTICLE</span><b>${String(i+1).padStart(2,"0")}</b></div><div class="article-body"><small>${String(i+1).padStart(2,"0")}</small><h3>${esc(a.title)}</h3><p>${esc(a.excerpt||"")}</p><a href="#articles">Read Article ↗</a></div></article>`).join("")}
+ window.editArticle=a=>{ $("#articleEditor").hidden=false;$("#articleId").value=a.id;$("#articleTitle").value=a.title||"";$("#articleExcerpt").value=a.excerpt||"";$("#articleBody").value=a.body||"";$("#articleImage").value=a.image_url||"";$("#articlePublished").checked=!!a.published;$("#articlesTab").scrollIntoView({behavior:"smooth",block:"start"})}
+ window.deleteArticle=async(id,t)=>{if(confirm("Delete this item?")){const {error}=await supabaseClient.from(t).delete().eq("id",id);if(error)flash(error.message,true);else{flash("Deleted.");t==="articles"?refreshArticles():t==="cars"?refreshCars():refreshGallery()}}}
+ function openArticle(){["articleId","articleTitle","articleExcerpt","articleBody","articleImage"].forEach(id=>$("#"+id).value="");$("#articlePublished").checked=false;$("#articleEditor").hidden=false}
+ async function saveArticle(){const payload={title:$("#articleTitle").value.trim(),excerpt:$("#articleExcerpt").value.trim(),body:$("#articleBody").value,image_url:$("#articleImage").value.trim(),published:$("#articlePublished").checked};if(!payload.title)return flash("Add an article title.",true);let q=$("#articleId").value?supabaseClient.from("articles").update(payload).eq("id",$("#articleId").value):supabaseClient.from("articles").insert(payload);const {error}=await q;if(error)flash(error.message,true);else{$("#articleEditor").hidden=true;flash("Article saved.");refreshArticles()}}
+ async function refreshCars(){const {data}=await supabaseClient.from("cars").select("*").order("created_at",{ascending:false});$("#carAdminList").innerHTML=(data||[]).map(c=>`<div class="admin-item"><div><b>${esc(c.name)}</b><span>${esc(c.meta||"")} • ${c.published?"Visible":"Hidden"}</span></div><div class="admin-item-actions"><button onclick='window.editCar(${JSON.stringify(c)})'>Edit</button><button onclick='window.deleteCar("${c.id}")'>Delete</button></div></div>`).join("")||'<div class="admin-msg">No cars yet.</div>';const pub=(data||[]).filter(x=>x.published);if(pub.length)$("#carGrid").innerHTML=pub.slice(0,6).map(c=>`<article class="car-card big"><span>MY GARAGE</span><h3>${esc(c.name)}</h3><p>${esc(c.desc||"")}</p><em>${esc(c.meta||"")}</em></article>`).join("")}
+ window.editCar=c=>{$("#carEditor").hidden=false;$("#carId").value=c.id;$("#carName").value=c.name||"";$("#carMeta").value=c.meta||"";$("#carDesc").value=c.desc||"";$("#carImage").value=c.image_url||"";$("#carPublished").checked=!!c.published}
+ window.deleteCar=async id=>{if(confirm("Delete this car?")){const {error}=await supabaseClient.from("cars").delete().eq("id",id);if(error)flash(error.message,true);else{flash("Deleted.");refreshCars()}}}
+ function openCar(){["carId","carName","carMeta","carDesc","carImage"].forEach(id=>$("#"+id).value="");$("#carPublished").checked=false;$("#carEditor").hidden=false}
+ async function saveCar(){const payload={name:$("#carName").value.trim(),meta:$("#carMeta").value.trim(),desc:$("#carDesc").value,image_url:$("#carImage").value.trim(),published:$("#carPublished").checked};if(!payload.name)return flash("Add a car name.",true);const q=$("#carId").value?supabaseClient.from("cars").update(payload).eq("id",$("#carId").value):supabaseClient.from("cars").insert(payload);const {error}=await q;if(error)flash(error.message,true);else{$("#carEditor").hidden=true;flash("Car saved.");refreshCars()}}
+ async function refreshGallery(){const {data}=await supabaseClient.from("gallery").select("*").order("created_at",{ascending:false});$("#galleryAdminList").innerHTML=(data||[]).map(g=>`<div class="admin-item"><div><b>${esc(g.caption||"Gallery image")}</b><span>${g.published?"Visible":"Hidden"}</span></div><div class="admin-item-actions"><button onclick='window.editGallery(${JSON.stringify(g)})'>Edit</button><button onclick='window.deleteGallery("${g.id}")'>Delete</button></div></div>`).join("")||'<div class="admin-msg">No gallery images yet.</div>';const pub=(data||[]).filter(x=>x.published);if(pub.length)$("#galleryGrid").innerHTML=pub.slice(0,8).map(g=>`<div class="gallery-placeholder" style="background-image:linear-gradient(transparent 30%,rgba(0,0,0,.65)),url('${esc(g.image_url)}');background-size:cover;background-position:center;color:#fff">${esc(g.caption||"")}</div>`).join("")}
+ window.editGallery=g=>{$("#galleryEditor").hidden=false;$("#galleryId").value=g.id;$("#galleryImage").value=g.image_url||"";$("#galleryCaption").value=g.caption||"";$("#galleryPublished").checked=!!g.published}
+ window.deleteGallery=async id=>{if(confirm("Delete this image?")){const {error}=await supabaseClient.from("gallery").delete().eq("id",id);if(error)flash(error.message,true);else{flash("Deleted.");refreshGallery()}}}
+ function openGallery(){["galleryId","galleryImage","galleryCaption"].forEach(id=>$("#"+id).value="");$("#galleryPublished").checked=false;$("#galleryEditor").hidden=false}
+ async function saveGallery(){const payload={image_url:$("#galleryImage").value.trim(),caption:$("#galleryCaption").value.trim(),published:$("#galleryPublished").checked};if(!payload.image_url)return flash("Add an image URL.",true);const q=$("#galleryId").value?supabaseClient.from("gallery").update(payload).eq("id",$("#galleryId").value):supabaseClient.from("gallery").insert(payload);const {error}=await q;if(error)flash(error.message,true);else{$("#galleryEditor").hidden=true;flash("Image saved.");refreshGallery()}}
 }
-$("#year").textContent=new Date().getFullYear();
-renderHero();initMenu();loadRemoteContent();initAdmin();
+$("#year").textContent=new Date().getFullYear();renderHero();initMenu();loadSiteContent();initAdmin();

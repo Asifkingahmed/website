@@ -1,20 +1,19 @@
-# Asif King Ahmed / TCB Auto — Website V2
+# Asif King Ahmed Website V3
 
-Premium personal-brand automotive website designed for Instagram bio traffic.
+V3 includes:
+- Responsive premium automotive UI for desktop, Mac, iOS/mobile and tablets.
+- Home -> Articles -> About -> My Cars -> Gallery -> TCB Auto -> Stories -> Contact.
+- Private Supabase admin dashboard.
+- Admin CRUD for Articles, Cars and Gallery plus homepage text and links.
+- RLS policies so only users listed in `admin_users` can write.
+- TCB logo in header/footer and AK logo in hero.
+- `assets/favicon.png` used for browser favicon.
 
-## Identity
-- Primary identity: Asif King Ahmed
-- Instagram: @asif_king_ahmed
-- YouTube: https://www.youtube.com/@asifkingahmed
-- Email: asifahmedmedia@gmail.com
-- TCB Auto / The Car Bro is positioned as the future platform.
+## Supabase setup
+1. Create your Auth user.
+2. Run `supabase-schema.sql` in Supabase SQL Editor.
+3. Add your Auth user's UUID to `public.admin_users`.
+4. Keep the publishable key in `config.js`; never put a service-role/secret key there.
 
-## Deployment
-Push to the existing GitHub repository connected to Vercel. Vercel will automatically create a new production deployment.
-
-## Branding
-- Header/fav icon: TCB Auto logo
-- Main hero disc: supplied Asif King Ahmed AK logo
-- Palette: black, graphite, white, red, subtle gold
-
-Never commit a Supabase secret/service-role key.
+## GitHub/Vercel
+Replace the existing V2 files with these V3 files and upload the `assets` folder. Commit to `main`; Vercel will redeploy automatically.
