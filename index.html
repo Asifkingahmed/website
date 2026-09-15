@@ -14,132 +14,47 @@
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="grain"></div>
+<div class="grain" aria-hidden="true"></div>
 <header class="site-header">
-  <a class="header-brand" href="#home" aria-label="Asif King Ahmed home">
-    <img src="assets/tcb-logo.jpg" alt="The Car Bro">
-    <span><strong>THE CAR BRO</strong><small>TCB AUTO</small></span>
-  </a>
-  <nav id="nav">
-    <a href="#home" class="active">Home</a>
-    <a href="#articles">Articles</a>
-    <a href="#about">About</a>
-    <a href="#cars">My Cars</a>
-    <a href="#gallery">Gallery</a>
-    <a href="#tcb">TCB Auto</a>
-    <a href="#stories">Stories</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <a class="header-brand" href="#home" aria-label="Asif King Ahmed home"><img src="assets/tcb-transparent.png" alt="The Car Bro"><span><strong>THE CAR BRO</strong><small>ASIF KING AHMED</small></span></a>
+  <nav id="nav" aria-label="Primary navigation"></nav>
   <a class="admin-shortcut" href="#admin">Admin</a>
   <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
 </header>
 
-<main>
+<main id="publicSite">
 <section id="home" class="hero page-section">
   <div class="hero-copy">
     <div class="eyebrow">ASIF KING AHMED <i></i> INDIAN AUTOMOTIVE CREATOR</div>
-    <h1>Cars.<br><span>Modifications.</span><br>Stories.</h1>
+    <h1 id="heroTitle">Cars.<br><span>Modifications.</span><br>Stories.</h1>
     <p id="heroDesc" class="hero-lead">Real cars. Real builds. Real stories — from an automotive creator building something bigger than a social feed.</p>
-    <div class="hero-actions">
-      <a class="btn primary" href="https://www.instagram.com/asif_king_ahmed/" target="_blank" rel="noopener">Instagram <b>↗</b></a>
-      <a class="btn secondary" href="https://www.youtube.com/@asifkingahmed" target="_blank" rel="noopener">YouTube <b>↗</b></a>
-      <a class="btn text" href="#articles">Read Articles <b>↓</b></a>
-    </div>
-    <div class="hero-stats">
-      <div><strong>BMW</strong><span>Cars & ownership</span></div>
-      <div><strong>BUILD</strong><span>Mods & restoration</span></div>
-      <div><strong>STORIES</strong><span>People & machines</span></div>
-    </div>
+    <div class="hero-actions"><a id="heroInstagram" class="btn primary" href="https://www.instagram.com/asif_king_ahmed/" target="_blank" rel="noopener">Instagram <b>↗</b></a><a id="heroYoutube" class="btn secondary" href="https://www.youtube.com/@asifkingahmed" target="_blank" rel="noopener">YouTube <b>↗</b></a><a class="btn text" href="#articles">Read Articles <b>↓</b></a></div>
+    <div class="hero-stats"><div><strong>BMW</strong><span>Cars & ownership</span></div><div><strong>BUILD</strong><span>Mods & restoration</span></div><div><strong>STORIES</strong><span>People & machines</span></div></div>
   </div>
-  <div class="hero-art">
-    <div class="halo"></div><div class="ring r1"></div><div class="ring r2"></div>
-    <div class="ak-disc"><img src="assets/asif-king-ahmed-logo.jpg" alt="Asif King Ahmed logo"></div>
-    <div class="hero-badge"><span>01</span><b>ASIF KING AHMED</b><small>CARS • MODIFICATIONS • STORIES</small></div>
-    <div class="tcb-mark"><img src="assets/tcb-logo.jpg" alt="The Car Bro"></div>
-  </div>
+  <div class="hero-art"><div class="halo"></div><div class="ring r1"></div><div class="ring r2"></div><div class="ak-disc"><img src="assets/asif-king-ahmed-logo.jpg" alt="Asif King Ahmed logo"></div><div class="hero-badge"><span>01</span><b>ASIF KING AHMED</b><small>CARS • MODIFICATIONS • STORIES</small></div><div class="tcb-mark"><img src="assets/tcb-transparent.png" alt="The Car Bro"></div></div>
 </section>
 
-<section id="articles" class="section page-section">
-  <div class="section-head">
-    <div><span class="eyebrow">01 / ARTICLES</span><h2>From the<br><span>garage.</span></h2></div>
-    <p>The place to send people from Instagram when you say <strong>“link in bio.”</strong> Long-form stories, ownership notes, build breakdowns, car finds and opinions.</p>
-  </div>
-  <div id="articleGrid" class="article-grid">
-    <article class="article-card featured-article">
-      <div class="article-art"><span>EDITORIAL</span><b>COMING SOON</b></div>
-      <div class="article-body"><small>01</small><h3>Articles are coming to the garage.</h3><p>Detailed automotive stories, builds and real-world ownership notes will live here.</p><a href="#admin">Manage in Admin ↗</a></div>
-    </article>
-    <article class="article-card"><div class="article-art alt"><span>BUILD</span><b>TCB</b></div><div class="article-body"><small>02</small><h3>Build stories, not just posts.</h3><p>Document modifications and the reasoning behind them.</p></div></article>
-    <article class="article-card"><div class="article-art alt2"><span>OWNERSHIP</span><b>REAL</b></div><div class="article-body"><small>03</small><h3>What it's actually like to own it.</h3><p>Service, maintenance, costs and lessons from the driver's seat.</p></div></article>
-  </div>
-</section>
+<section id="articles" class="section page-section"><div class="section-head"><div><span class="eyebrow">01 / ARTICLES</span><h2>From the<br><span>garage.</span></h2></div><p id="articlesIntro">The place to send people from Instagram when you say <strong>“link in bio.”</strong> Long-form stories, ownership notes, build breakdowns, car finds and opinions.</p></div><div id="articleGrid" class="article-grid"></div></section>
+<section id="about" class="section section-dark page-section"><div class="section-head"><div><span class="eyebrow">02 / ABOUT</span><h2>The person<br>behind the page.</h2></div><p id="aboutIntro">This is the home base for everything I do around cars — beyond Instagram, beyond a single reel, and eventually beyond social media.</p></div><div class="about-grid"><article class="about-main"><div class="card-kicker">ASIF KING AHMED</div><h3>Automotive creator.<br><em>Car enthusiast.</em></h3><p id="aboutText">BMW, cars, modifications, restoration and the real stories behind the machines. This website grows with the journey.</p><a id="aboutInstagram" class="arrow-link" href="https://www.instagram.com/asif_king_ahmed/" target="_blank" rel="noopener">@asif_king_ahmed ↗</a></article><div class="about-side"><article><span>CONTENT</span><b>Instagram</b><p>Reels, updates, car finds and day-to-day automotive content.</p></article><article><span>LONG FORM</span><b>YouTube</b><p>Deeper videos, ownership, modifications and automotive stories.</p></article></div></div></section>
+<section id="cars" class="section page-section"><div class="section-head"><div><span class="eyebrow">03 / MY CARS</span><h2>Machines<br>with a story.</h2></div><p>A dedicated home for my cars, builds, modifications, maintenance journeys and the decisions behind every change.</p></div><div id="carGrid" class="car-grid"></div></section>
+<section id="gallery" class="section section-dark page-section"><div class="section-head"><div><span class="eyebrow">04 / GALLERY</span><h2>Cars in<br><span>focus.</span></h2></div><p>A clean visual archive for builds, shoots, events and the moments that deserve more than a disappearing story.</p></div><div id="galleryGrid" class="gallery-grid"></div></section>
+<section id="tcb" class="section page-section tcb-section"><div class="tcb-intro"><div><span class="eyebrow">05 / TCB AUTO</span><h2>More than a<br><span>creator page.</span></h2></div><p>TCB Auto is the bigger platform behind the personal brand — built to grow into a community around cars and the people who live them.</p></div><div class="tcb-grid"><article><b>01</b><h3>Verified Used Cars</h3><p>Curated listings with a stronger focus on trust and real information.</p><span>FUTURE</span></article><article><b>02</b><h3>Buy / Sell / Exchange</h3><p>A marketplace designed around enthusiasts, not just listings.</p><span>FUTURE</span></article><article><b>03</b><h3>TCB Stories</h3><p>People, builds and cars worth talking about.</p><span>FUTURE</span></article><article><b>04</b><h3>Community</h3><p>Member profiles, garages and conversations around the culture.</p><span>FUTURE</span></article></div></section>
+<section id="stories" class="section section-dark page-section"><div class="section-head"><div><span class="eyebrow">06 / STORIES</span><h2>Every car<br>has a <span>story.</span></h2></div><p>Eventually this becomes a proper stream of TCB stories — not just social updates.</p></div><div id="storyGrid" class="story-grid"></div></section>
+<section id="contact" class="section contact page-section"><div><span class="eyebrow">07 / CONTACT</span><h2>Let's build<br><span>something.</span></h2><p>For collaborations, automotive projects, brand work or just a good car conversation.</p></div><a id="contactMail" class="contact-mail" href="mailto:asifahmedmedia@gmail.com"><small>EMAIL</small><strong>asifahmedmedia@gmail.com</strong><b>↗</b></a></section>
 
-<section id="about" class="section section-dark page-section">
-  <div class="section-head">
-    <div><span class="eyebrow">02 / ABOUT</span><h2>The person<br>behind the page.</h2></div>
-    <p>This is the home base for everything I do around cars — beyond Instagram, beyond a single reel, and eventually beyond social media.</p>
-  </div>
-  <div class="about-grid">
-    <article class="about-main"><div class="card-kicker">ASIF KING AHMED</div><h3>Automotive creator.<br><em>Car enthusiast.</em></h3><p>BMW, cars, modifications, restoration and the real stories behind the machines. This website grows with the journey.</p><a class="arrow-link" href="https://www.instagram.com/asif_king_ahmed/" target="_blank" rel="noopener">@asif_king_ahmed ↗</a></article>
-    <div class="about-side"><article><span>CONTENT</span><b>Instagram</b><p>Reels, updates, car finds and day-to-day automotive content.</p></article><article><span>LONG FORM</span><b>YouTube</b><p>Deeper videos, ownership, modifications and automotive stories.</p></article></div>
-  </div>
-</section>
-
-<section id="cars" class="section page-section">
-  <div class="section-head"><div><span class="eyebrow">03 / MY CARS</span><h2>Machines<br>with a story.</h2></div><p>A dedicated home for my cars, builds, modifications, maintenance journeys and the decisions behind every change.</p></div>
-  <div id="carGrid" class="car-grid">
-    <article class="car-card big"><span>MY GARAGE</span><h3>Current & future builds</h3><p>Detailed car pages with photos, specifications, modifications and ownership notes.</p><em>BUILDING SOON</em></article>
-    <article class="car-card"><span>MODIFICATIONS</span><h3>Build logs</h3><p>Track what changed, why it changed and what it cost.</p><em>COMING SOON</em></article>
-    <article class="car-card"><span>OWNERSHIP</span><h3>Real experience</h3><p>Service, maintenance, upgrades and lessons from actually living with the car.</p><em>COMING SOON</em></article>
-  </div>
-</section>
-
-<section id="gallery" class="section section-dark page-section">
-  <div class="section-head"><div><span class="eyebrow">04 / GALLERY</span><h2>Cars in<br><span>focus.</span></h2></div><p>A clean visual archive for builds, shoots, events and the moments that deserve more than a disappearing story.</p></div>
-  <div id="galleryGrid" class="gallery-grid"><div class="gallery-placeholder">YOUR GARAGE<br><small>Photos you upload in Admin will appear here.</small></div><div class="gallery-placeholder">BUILDS<br><small>Drag your best shots into the CMS.</small></div><div class="gallery-placeholder wide">STORIES<br><small>A growing automotive visual archive.</small></div></div>
-</section>
-
-<section id="tcb" class="section page-section tcb-section">
-  <div class="tcb-intro"><div><span class="eyebrow">05 / TCB AUTO</span><h2>More than a<br><span>creator page.</span></h2></div><p>TCB Auto is the bigger platform behind the personal brand — built to grow into a community around cars and the people who live them.</p></div>
-  <div class="tcb-grid"><article><b>01</b><h3>Verified Used Cars</h3><p>Curated listings with a stronger focus on trust and real information.</p><span>FUTURE</span></article><article><b>02</b><h3>Buy / Sell / Exchange</h3><p>A marketplace designed around enthusiasts, not just listings.</p><span>FUTURE</span></article><article><b>03</b><h3>TCB Stories</h3><p>People, builds and cars worth talking about.</p><span>FUTURE</span></article><article><b>04</b><h3>Community</h3><p>Member profiles, garages and conversations around the culture.</p><span>FUTURE</span></article></div>
-</section>
-
-<section id="stories" class="section section-dark page-section">
-  <div class="section-head"><div><span class="eyebrow">06 / STORIES</span><h2>Every car<br>has a <span>story.</span></h2></div><p>Eventually this becomes a proper stream of TCB stories — not just social updates.</p></div>
-  <div id="storyGrid" class="story-grid"><article><small>TCB STORIES</small><h3>From Instagram reels to stories that stay.</h3><p>Use the Admin dashboard to publish your own editorial pieces as the platform grows.</p><a href="#articles">Explore Articles ↗</a></article><article><small>THE JOURNEY</small><h3>Document the build.</h3><p>Every modification has a reason. Every car has a chapter.</p></article></div>
-</section>
-
-<section id="contact" class="section contact page-section">
-  <div><span class="eyebrow">07 / CONTACT</span><h2>Let's build<br><span>something.</span></h2><p>For collaborations, automotive projects, brand work or just a good car conversation.</p></div>
-  <a class="contact-mail" href="mailto:asifahmedmedia@gmail.com"><small>EMAIL</small><strong>asifahmedmedia@gmail.com</strong><b>↗</b></a>
-</section>
-
-<section id="admin" class="section admin-section page-section">
-  <div class="section-head"><div><span class="eyebrow">PRIVATE AREA</span><h2>Admin<br><span>Control Room.</span></h2></div><p>Only your authorised Supabase account can publish or edit content.</p></div>
-  <div id="adminState"></div>
-  <div id="adminPanel" class="admin-panel" hidden>
-    <div class="admin-toolbar"><strong>CONTENT MANAGER</strong><button id="logout" class="btn secondary">Sign out</button></div>
-    <div class="admin-tabs">
-      <button class="tab active" data-tab="homeTab">Homepage</button>
-      <button class="tab" data-tab="articlesTab">Articles</button>
-      <button class="tab" data-tab="carsTab">Cars</button>
-      <button class="tab" data-tab="galleryTab">Gallery</button>
-      <button class="tab" data-tab="settingsTab">Links & Settings</button>
-    </div>
-    <div id="homeTab" class="tab-panel active">
-      <div class="form-grid"><label>Hero title<textarea id="editHeroTitle" rows="3"></textarea></label><label>Hero description<textarea id="editHeroDesc" rows="4"></textarea></label></div><button id="saveHero" class="btn primary">Save Homepage</button>
-    </div>
-    <div id="articlesTab" class="tab-panel"><div class="admin-add"><h3>Articles</h3><button id="newArticle" class="btn primary">+ New Article</button></div><div id="articleAdminList"></div><div id="articleEditor" class="editor" hidden><input type="hidden" id="articleId"><label>Title<input id="articleTitle"></label><label>Excerpt<textarea id="articleExcerpt" rows="3"></textarea></label><label>Body<textarea id="articleBody" rows="10" placeholder="Write your article here..."></textarea></label><label>Cover image URL<input id="articleImage" placeholder="https://... or Supabase Storage URL"></label><label class="check"><input type="checkbox" id="articlePublished"> Published</label><button id="saveArticle" class="btn primary">Save Article</button> <button id="cancelArticle" class="btn secondary">Cancel</button></div></div>
-    <div id="carsTab" class="tab-panel"><div class="admin-add"><h3>My Cars</h3><button id="newCar" class="btn primary">+ Add Car</button></div><div id="carAdminList"></div><div id="carEditor" class="editor" hidden><input type="hidden" id="carId"><label>Car name<input id="carName"></label><label>Year / model<input id="carMeta"></label><label>Description<textarea id="carDesc" rows="4"></textarea></label><label>Image URL<input id="carImage"></label><label class="check"><input type="checkbox" id="carPublished"> Show on site</label><button id="saveCar" class="btn primary">Save Car</button> <button id="cancelCar" class="btn secondary">Cancel</button></div></div>
-    <div id="galleryTab" class="tab-panel"><div class="admin-add"><h3>Gallery</h3><button id="newGallery" class="btn primary">+ Add Image</button></div><div id="galleryAdminList"></div><div id="galleryEditor" class="editor" hidden><input type="hidden" id="galleryId"><label>Image URL<input id="galleryImage"></label><label>Caption<input id="galleryCaption"></label><label class="check"><input type="checkbox" id="galleryPublished"> Show on site</label><button id="saveGallery" class="btn primary">Save Image</button> <button id="cancelGallery" class="btn secondary">Cancel</button></div></div>
-    <div id="settingsTab" class="tab-panel"><div class="form-grid"><label>Instagram URL<input id="setInstagram" value="https://www.instagram.com/asif_king_ahmed/"></label><label>YouTube URL<input id="setYoutube" value="https://www.youtube.com/@asifkingahmed"></label><label>Contact email<input id="setEmail" value="asifahmedmedia@gmail.com"></label></div><button id="saveSettings" class="btn primary">Save Links</button></div>
-  </div>
-</section>
+<section id="admin" class="section admin-section page-section"><div class="section-head"><div><span class="eyebrow">PRIVATE AREA</span><h2>Admin<br><span>Control Room.</span></h2></div><p>One private dashboard for your whole site. Upload, edit, publish, reorder and manage your content without touching code.</p></div><div id="adminState"></div><div id="adminPanel" class="admin-panel" hidden>
+  <div class="admin-toolbar"><div><strong>ASIF KING AHMED — CONTENT MANAGER</strong><small id="adminUser"></small></div><button id="logout" class="btn secondary">Sign out</button></div>
+  <div class="admin-tabs" role="tablist"><button class="tab active" data-tab="homeTab">Homepage</button><button class="tab" data-tab="articlesTab">Articles</button><button class="tab" data-tab="carsTab">My Cars</button><button class="tab" data-tab="galleryTab">Gallery</button><button class="tab" data-tab="settingsTab">Site Settings</button></div>
+  <div id="homeTab" class="tab-panel active"><div class="admin-card"><div class="admin-card-head"><div><span class="eyebrow">HOMEPAGE</span><h3>Control the first impression.</h3></div></div><div class="form-grid"><label>Hero title<textarea id="editHeroTitle" rows="3"></textarea></label><label>Hero description<textarea id="editHeroDesc" rows="4"></textarea></label><label>About intro<textarea id="editAboutIntro" rows="3"></textarea></label><label>About text<textarea id="editAboutText" rows="4"></textarea></label></div><div class="form-actions"><button id="saveHero" class="btn primary">Save Homepage</button></div></div><div class="admin-card"><div class="admin-card-head"><div><span class="eyebrow">SECTIONS</span><h3>Visibility & order</h3></div><p>Drag sections into the order you want. Hide sections you aren't using yet.</p></div><div id="sectionOrder" class="sortable-list"></div><div class="form-actions"><button id="saveSectionOrder" class="btn primary">Save Layout</button></div></div></div>
+  <div id="articlesTab" class="tab-panel"><div class="admin-card"><div class="admin-add"><div><span class="eyebrow">PUBLISHING</span><h3>Articles</h3></div><button id="newArticle" class="btn primary">+ New Article</button></div><div id="articleAdminList"></div><div id="articleEditor" class="editor" hidden><input type="hidden" id="articleId"><div class="form-grid"><label>Title<input id="articleTitle" maxlength="180"></label><label>Slug <input id="articleSlug" placeholder="my-bmw-build"></label></div><label>Excerpt<textarea id="articleExcerpt" rows="3" maxlength="300"></textarea></label><label>Article body<div class="editor-tools"><button type="button" data-cmd="bold">B</button><button type="button" data-cmd="italic"><i>I</i></button><button type="button" data-cmd="formatBlock" data-value="h2">H2</button><button type="button" data-cmd="insertUnorderedList">• List</button><button type="button" data-cmd="formatBlock" data-value="blockquote">Quote</button></div><div id="articleBody" class="rich-editor" contenteditable="true" data-placeholder="Write your article here..."></div></label><div class="upload-grid"><div><label>Cover image</label><div class="dropzone" data-target="articleCover"><input id="articleCoverInput" type="file" accept="image/*"><div class="dropzone-copy"><b>Drop cover image here</b><span>or click to choose • JPG, PNG, WEBP</span></div><img id="articleCoverPreview" class="upload-preview" alt="Cover preview" hidden></div></div><div><label>Article SEO</label><input id="articleSeoTitle" placeholder="SEO title"><textarea id="articleSeoDescription" rows="4" placeholder="SEO description"></textarea></div></div><div class="check-row"><label class="check"><input type="checkbox" id="articlePublished"> Publish article</label><button id="saveArticle" class="btn primary">Save Article</button><button id="cancelArticle" class="btn secondary">Cancel</button></div></div></div></div>
+  <div id="carsTab" class="tab-panel"><div class="admin-card"><div class="admin-add"><div><span class="eyebrow">GARAGE</span><h3>My Cars</h3></div><button id="newCar" class="btn primary">+ Add Car</button></div><div id="carAdminList"></div><div id="carEditor" class="editor" hidden><input type="hidden" id="carId"><div class="form-grid"><label>Car name<input id="carName" maxlength="120"></label><label>Year / model<input id="carMeta" maxlength="120"></label></div><label>Description<textarea id="carDesc" rows="4"></textarea></label><div class="upload-grid"><div><label>Cover image</label><div class="dropzone" data-target="carCover"><input id="carCoverInput" type="file" accept="image/*"><div class="dropzone-copy"><b>Drop cover image here</b><span>or click to choose</span></div><img id="carCoverPreview" class="upload-preview" alt="Car preview" hidden></div></div><div><label>Additional photos</label><div class="dropzone multi" data-target="carGallery"><input id="carGalleryInput" type="file" accept="image/*" multiple><div class="dropzone-copy"><b>Drop multiple photos here</b><span>or click to choose</span></div><div id="carGalleryPreview" class="thumb-grid"></div></div></div></div><div class="check-row"><label class="check"><input type="checkbox" id="carPublished"> Show on site</label><button id="saveCar" class="btn primary">Save Car</button><button id="cancelCar" class="btn secondary">Cancel</button></div></div></div></div>
+  <div id="galleryTab" class="tab-panel"><div class="admin-card"><div class="admin-add"><div><span class="eyebrow">VISUAL ARCHIVE</span><h3>Gallery</h3></div><button id="newGallery" class="btn primary">+ Add Photos</button></div><div id="galleryAdminList"></div><div id="galleryEditor" class="editor" hidden><input type="hidden" id="galleryId"><label>Photos</label><div class="dropzone multi" data-target="galleryPhotos"><input id="galleryInput" type="file" accept="image/*" multiple><div class="dropzone-copy"><b>Drag & drop your photos here</b><span>Multiple files supported • no URLs needed</span></div><div id="galleryPreview" class="thumb-grid"></div></div><label>Caption<input id="galleryCaption" maxlength="140"></label><label class="check"><input type="checkbox" id="galleryPublished"> Show on site</label><div class="check-row"><button id="saveGallery" class="btn primary">Save Photos</button><button id="cancelGallery" class="btn secondary">Cancel</button></div></div></div></div>
+  <div id="settingsTab" class="tab-panel"><div class="admin-card"><div class="admin-card-head"><div><span class="eyebrow">SITE SETTINGS</span><h3>Brand, links & SEO</h3></div></div><div class="form-grid"><label>Instagram URL<input id="setInstagram"></label><label>YouTube URL<input id="setYoutube"></label><label>Contact email<input id="setEmail" type="email"></label><label>Site title<input id="setSiteTitle"></label><label>Meta description<textarea id="setMetaDescription" rows="3"></textarea></label><label>Announcement bar<textarea id="setAnnouncement" rows="3" placeholder="Optional"></textarea></label></div><div class="form-actions"><button id="saveSettings" class="btn primary">Save Site Settings</button></div></div><div class="admin-card"><div class="admin-card-head"><div><span class="eyebrow">MAINTENANCE</span><h3>Content health</h3></div><p id="healthText">Checking…</p></div><button id="refreshAll" class="btn secondary">Refresh site data</button></div></div>
+</div></section>
 </main>
-<footer><div class="footer-brand"><img src="assets/tcb-logo.jpg" alt="The Car Bro"><div><strong>ASIF KING AHMED</strong><small>THE CAR BRO • TCB AUTO</small></div></div><p>Cars. Modifications. Stories.</p><span>© <span id="year"></span> Asif King Ahmed</span></footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js"></script>
-<script src="content.js"></script>
-<script src="app.js"></script>
-</body>
-</html>
+
+<div id="articleModal" class="modal" hidden><div class="modal-backdrop" data-close-modal></div><article class="article-reader"><button class="modal-close" data-close-modal aria-label="Close article">×</button><div id="readerCover" class="reader-cover"></div><div class="reader-content"><div class="reader-meta" id="readerMeta"></div><h1 id="readerTitle"></h1><p id="readerExcerpt" class="reader-excerpt"></p><div id="readerBody" class="reader-body"></div></div></article></div>
+
+<footer><div class="footer-brand"><img src="assets/tcb-transparent.png" alt="The Car Bro"><div><strong>ASIF KING AHMED</strong><small>THE CAR BRO • TCB AUTO</small></div></div><p>Cars. Modifications. Stories.</p><span>© <span id="year"></span> Asif King Ahmed</span></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="config.js"></script><script src="content.js"></script><script src="app.js"></script>
+</body></html>
